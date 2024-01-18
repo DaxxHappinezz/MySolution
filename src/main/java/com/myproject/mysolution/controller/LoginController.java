@@ -6,10 +6,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 public class LoginController {
 
     private final UserService userService;
@@ -18,13 +17,7 @@ public class LoginController {
         this.userService = userService;
     }
 
-    @GetMapping("/login")
-    public String test() {
-        return "loginForm";
-    }
-
     @PostMapping("/login")
-    @ResponseBody
     public ResponseEntity<String> submit(@RequestBody User user, HttpServletRequest request) {
         try {
             if (!loginCheck(user.getId(), user.getPassword()))
@@ -34,7 +27,6 @@ public class LoginController {
 
             HttpSession session =  request.getSession();
             session.setAttribute("id", getUser.getId());
-            session.setAttribute("user_no", getUser.getUser_no());
 
             return ResponseEntity.status(HttpStatus.OK)
                     .body("Login OK.");
@@ -46,7 +38,6 @@ public class LoginController {
     }
 
     @PostMapping("/logout")
-    @ResponseBody
     public ResponseEntity<String> logout(HttpServletRequest request) {
         try {
             HttpSession session = request.getSession();

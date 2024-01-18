@@ -20,12 +20,12 @@ public class SubscriptionService {
     public int getCount() throws Exception {
         return this.subscriptionDao.count();
     }
-    public Subscription getSubscription(Integer user_no) throws Exception {
-        return this.subscriptionDao.selectByUserNo(user_no);
+    public Subscription getSubscription(String user_id) throws Exception {
+        return this.subscriptionDao.selectByUserId(user_id);
     }
-    public List<Subscription> checkSubscription(Integer user_no, String company) throws Exception {
+    public List<Subscription> checkSubscription(String user_id, String company) throws Exception {
         Map check = new HashMap<>();
-        check.put("user_no", user_no);
+        check.put("user_id", user_id);
         check.put("company", company);
         return this.subscriptionDao.selectByDuplication(check);
     }
@@ -38,8 +38,8 @@ public class SubscriptionService {
     public int modify(Subscription subscription) throws Exception {
         return this.subscriptionDao.update(subscription);
     }
-    public int remove(Integer user_no) throws Exception {
-        return this.subscriptionDao.delete(user_no);
+    public int remove(String user_id) throws Exception {
+        return this.subscriptionDao.delete(user_id);
     }
     public int removeAll() throws Exception {
         return this.subscriptionDao.deleteAll();

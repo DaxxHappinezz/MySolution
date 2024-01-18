@@ -35,11 +35,8 @@ public class UserService {
     public int registration(User user) throws Exception {
         return this.userDao.insert(user);
     }
-    public int modifyInfo(String password, String name) throws Exception {
-        Map userInfo = new HashMap<>();
-        userInfo.put("password", password);
-        userInfo.put("name", name);
-        return this.userDao.update(userInfo);
+    public int modifyInfo(User user) throws Exception {
+        return this.userDao.update(user);
     }
     public int remove(String id) throws Exception {
         return this.userDao.delete(id);

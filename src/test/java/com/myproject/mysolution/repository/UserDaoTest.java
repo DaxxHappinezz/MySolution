@@ -112,12 +112,9 @@ class UserDaoTest {
         assertTrue(rowCnt == 1);
         user = this.userDao.selectById("hello");
 
-        Map userInfo = new HashMap<>();
-        userInfo.put("password", "qwer");
-        userInfo.put("name", "testman");
-        userInfo.put("id", user.getId());
-        System.out.println("userInfo = " + userInfo);
-        rowCnt = this.userDao.update(userInfo);
+        user.setPassword("qwer");
+        System.out.println("modifyUser = " + user);
+        rowCnt = this.userDao.update(user);
         assertTrue(rowCnt == 1);
 
         User user2 = this.userDao.selectById("hello");

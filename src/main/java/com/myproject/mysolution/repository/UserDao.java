@@ -22,7 +22,7 @@ public interface UserDao {
     int insert(@Param("user") User user) throws Exception;
     @Update("UPDATE users SET password = #{user.password}, name = #{user.name}, updated = CURRENT_TIMESTAMP " +
             "WHERE id = #{user.id}")
-    int update(@Param("user") Map userInfo) throws Exception;
+    int update(@Param("user") User user) throws Exception;
     @Delete("DELETE FROM users WHERE id = #{id}")
     int delete(String id) throws Exception;
     @Delete("DELETE FROM users")

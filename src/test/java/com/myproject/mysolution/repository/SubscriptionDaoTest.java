@@ -50,7 +50,7 @@ class SubscriptionDaoTest {
         User getUser = this.userDao.selectById("test");
         Product getProduct = this.productDao.selectByName("ace");
 
-        Subscription subscription = new Subscription(getUser.getUser_no(), getProduct.getProduct_no(), "test.com", 3, 12);
+        Subscription subscription = new Subscription(getUser.getId(), getProduct.getProduct_no(), "test.com", 3, 12);
         rowCnt = this.subscriptionDao.insert(subscription);
         assertTrue(rowCnt == 1);
     }
@@ -86,12 +86,12 @@ class SubscriptionDaoTest {
         Product getProduct = this.productDao.selectByName("ace");
 
         // subscription DB 접속 후 위 객체를 토대로 test date 추가
-        Subscription subscription = new Subscription(getUser.getUser_no(), getProduct.getProduct_no(), "test.com", 3, 12);
+        Subscription subscription = new Subscription(getUser.getId(), getProduct.getProduct_no(), "test.com", 3, 12);
         rowCnt = this.subscriptionDao.insert(subscription);
         assertTrue(rowCnt == 1);
 
         // getUser에 user_no를 통해 구독 중인 데이터 가져오기
-        Subscription subscription2 = this.subscriptionDao.selectByUserNo(getUser.getUser_no());
+        Subscription subscription2 = this.subscriptionDao.selectByUserId(getUser.getId());
         assertTrue(Objects.equals(subscription.getSubscription_no(), subscription2.getSubscription_no()));
     }
 
@@ -130,7 +130,7 @@ class SubscriptionDaoTest {
 
         // 각 12 개월로 구독 진행
         for (int i = 0; i < users.size(); i++) {
-            Subscription subscription = new Subscription(users.get(i).getUser_no(), products.get(i).getProduct_no(), "test.com"+(i+1), 10, 12);
+            Subscription subscription = new Subscription(users.get(i).getId(), products.get(i).getProduct_no(), "test.com"+(i+1), 10, 12);
             rowCnt = this.subscriptionDao.insert(subscription);
             assertTrue(rowCnt == 1);
         }
@@ -139,12 +139,12 @@ class SubscriptionDaoTest {
 
         // 각 4, 5, 6, 7 개월 연장
         int month = 4;
-        int userNo = users.get(0).getUser_no();
-        Subscription tempSubs = this.subscriptionDao.selectByUserNo(userNo);
+        String userId = users.get(0).getId();
+        Subscription tempSubs = this.subscriptionDao.selectByUserId(userId);
         int subsNo = tempSubs.getSubscription_no();
 
         for (int i = 0; i < users.size() ; i++) {
-            Subscription changeSubsInfo = new Subscription(users.get(i).getUser_no(), null, "test.com"+(i+1), 10, month);
+            Subscription changeSubsInfo = new Subscription(users.get(i).getId(), "", "test.com"+(i+1), 10, month);
             changeSubsInfo.setSubscription_no(subsNo);
             rowCnt = this.subscriptionDao.update(changeSubsInfo);
             assertTrue(rowCnt == 1);
@@ -156,8 +156,8 @@ class SubscriptionDaoTest {
         for (int i = 0; i < subscriptionList_after.size(); i++) {
 //            System.out.println("subscriptionList_before.get("+i+") = " + subscriptionList_before.get(i));
 //            System.out.println("subscriptionList_after.get("+i+") = " + subscriptionList_after.get(i));
-            System.out.println("before - user"+(i+1)+" no : " + subscriptionList_before.get(i).getUser_no() + " | month : " + subscriptionList_before.get(i).getMonth() + " - before");
-            System.out.println("after  - user"+(i+1)+" no : " + subscriptionList_after.get(i).getUser_no() + " | month : " + subscriptionList_after.get(i).getMonth() + " - after");
+            System.out.println("before - user"+(i+1)+" no : " + subscriptionList_before.get(i).getUser_id() + " | month : " + subscriptionList_before.get(i).getMonth() + " - before");
+            System.out.println("after  - user"+(i+1)+" no : " + subscriptionList_after.get(i).getUser_id() + " | month : " + subscriptionList_after.get(i).getMonth() + " - after");
         }
 
     }
