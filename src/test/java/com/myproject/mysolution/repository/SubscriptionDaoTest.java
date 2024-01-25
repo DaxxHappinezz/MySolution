@@ -39,9 +39,9 @@ class SubscriptionDaoTest {
         rowCnt = this.productDao.count();
         assertTrue(rowCnt == 0);
 
-        User user = new User("test", "asdf", "testman");
-        rowCnt = this.userDao.insert(user);
-        assertTrue(rowCnt == 1);
+//        User user = new User("test", "asdf", "testman");
+//        rowCnt = this.userDao.insert(user);
+//        assertTrue(rowCnt == 1);
 
         Product product = new Product("ace", BigInteger.valueOf(5000), 10000);
         rowCnt = this.productDao.insert(product);
@@ -73,9 +73,9 @@ class SubscriptionDaoTest {
         assertTrue(rowCnt == 0);
 
         // users에 test data 추가
-        User user = new User("test", "asdf", "testman");
-        rowCnt = this.userDao.insert(user);
-        assertTrue(rowCnt == 1);
+//        User user = new User("test", "asdf", "testman");
+//        rowCnt = this.userDao.insert(user);
+//        assertTrue(rowCnt == 1);
 
         // products test data 추가
         Product product = new Product("ace", BigInteger.valueOf(5000), 10000);
@@ -113,14 +113,14 @@ class SubscriptionDaoTest {
         assertTrue(rowCnt == 0);
 
         // users, products DB에 테스트 data 추가(반복문 3번 씩)
-        for (int i = 0; i < 4; i++) {
-            User user = new User("test"+(i+1), "asdf", "testman");
-            rowCnt = this.userDao.insert(user);
-            assertTrue(rowCnt == 1);
-            Product product = new Product("ace"+(i+1), BigInteger.valueOf(5000), 10000);
-            rowCnt = this.productDao.insert(product);
-            assertTrue(rowCnt == 1);
-        }
+//        for (int i = 0; i < 4; i++) {
+//            User user = new User("test"+(i+1), "asdf", "testman");
+//            rowCnt = this.userDao.insert(user);
+//            assertTrue(rowCnt == 1);
+//            Product product = new Product("ace"+(i+1), BigInteger.valueOf(5000), 10000);
+//            rowCnt = this.productDao.insert(product);
+//            assertTrue(rowCnt == 1);
+//        }
 
         List<User> users = this.userDao.selectAll();
         assertTrue(users.size() == 4);

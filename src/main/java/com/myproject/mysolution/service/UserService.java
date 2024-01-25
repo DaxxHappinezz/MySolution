@@ -2,6 +2,7 @@ package com.myproject.mysolution.service;
 
 import com.myproject.mysolution.domain.User;
 import com.myproject.mysolution.repository.UserDao;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -9,13 +10,10 @@ import java.util.List;
 import java.util.Map;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
     private final UserDao userDao;
-
-    public UserService(UserDao userDao) {
-        this.userDao = userDao;
-    }
 
     public int getCount() throws Exception {
         return this.userDao.count();
@@ -33,6 +31,10 @@ public class UserService {
         return this.userDao.selectAll();
     }
     public int registration(User user) throws Exception {
+        User isExistUser = this.userDao.selectById(user.getId());
+        if (isExistUser != null) {
+            throw new Exception("Requested User Id already used.");
+        }
         return this.userDao.insert(user);
     }
     public int modifyInfo(User user) throws Exception {

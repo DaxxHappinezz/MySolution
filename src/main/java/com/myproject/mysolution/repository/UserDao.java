@@ -12,7 +12,7 @@ public interface UserDao {
     @Select("SELECT count(*) FROM users")
     int count() throws Exception;
     @Select("SELECT * FROM users WHERE id = #{id}")
-    User selectById(String id) throws Exception;
+    User selectById(String id);
     @Select("SELECT * FROM users WHERE id = #{user.id} AND name = #{user.name}")
     User selectByName(@Param("user") Map userInfo) throws Exception;
     @Select("SELECT * FROM users")

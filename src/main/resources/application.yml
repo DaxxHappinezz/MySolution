@@ -1,0 +1,16 @@
+server:
+  port: 9191
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/mysolution
+    username: james
+    password: mysql
+
+security:
+  key:
+    #thisisspringbootsecurityjwtwithapplicationbyjames
+    secret-key: Ps8tYf7d1aw3Kohg6SsSKBsz6og9nXtvF7qRZ2FVJ2j8JKtZIzLP1tohRtBrNoP2KjIRk7wz98B5GotyhLQHGQ==
+
+

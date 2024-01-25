@@ -22,14 +22,6 @@ public class Subscription {
     private LocalDateTime created;
     private LocalDateTime updated;
 
-//    public Subscription(Integer user_no, Integer product_no, String company, Integer member, Integer month) {
-//        this.user_no = user_no;
-//        this.product_no = product_no;
-//        this.company = company;
-//        this.member = member;
-//        this.month = month;
-//    }
-
     public Subscription(String user_id, Integer product_no, String company, Integer member, Integer month) {
         this.user_id = user_id;
         this.product_no = product_no;
